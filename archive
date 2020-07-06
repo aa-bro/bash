@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ $# -eq 0 ]; then
+    echo -n "filename> "
+    read filename
+else
+    filename=$1
+fi
+
+if [ ! -f "$filename" ]; then
+    echo "No such file: $filename"
+    exit $?
+fi
+
+case $filename in
+    *.tar)      tar xf $filename;;
+    *.tar.bz2)  tar xjf $filename;;
+    *.tbz)      tar xjf $filename;;
+    *.tbz2)     tar xjf $filename;;
+    *.tgz)      tar xzf $filename;;
+    *.tar.gz)   tar xzf $filename;;
+    *.gz)       gunzip $filename;;
+    *.bz2)      bunzip2 $filename;;
+    *.zip)      unzip $filename;;
+    *.Z)        uncompress $filename;;
+    *.rar)      rar x $filename ;;
+    *)
+esac
